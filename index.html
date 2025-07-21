@@ -13,39 +13,30 @@
 
 
     <style>
-      .bgCanvas {
-    background: linear-gradient(to left, turquoise, greenyellow);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 180px;
-    width: 90%;
-    margin: auto;
-    border-radius: 30px;
-    margin-bottom: 20px;
-      }
 
-      
-.qrCanvas {
-    width: 84%;
-    padding: 5px 5px 10px 5px;
-    background-color: white;
-    height: 155px;
-    margin-left: auto;
-    margin-right: auto;
-    border-radius: 30px;
-    text-align: center;
-  }
+  .container_item_qr {
+      display: flex;
+      width: 200px;
+      height: 200px;
+     
+    }
 
+    .main-boxr_item_qr {
+      flex: 1;
+      margin:auto;
+    }
 
-
-@media print {
- 
-  #qrcode{
-    grid-template-columns: repeat(3, 1fr)!important;
-    row-gap: 50px;
-  }
-}
+    .label-boxr_item_qr {
+      width: 40px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      writing-mode: vertical-rl;
+      transform: rotate(180deg); /* texte lisible de bas en haut */
+      color: #000; 
+      font-family: sans-serif;
+      font-size: 24px;
+    }
 
       
     </style>
@@ -109,10 +100,14 @@ function createqrCode(){
   
   table.forEach((item, index) => {
    
-   document.querySelector('#alt_qrCode').innerHTML += `<div style="text-align:center; margin-bottom: 10px;">
-    <p> <b>${item.nom}</b></p>
-  <img src="https://api.qrserver.com/v1/create-qr-code/?data=https://www.google.com/search?q=${item.nom}&size=150x150" alt="QR Google">
-</div>`
+   document.querySelector('#alt_qrCode').innerHTML += ` <div class="container_item_qr">
+    <div class="main-boxr_item_qr">
+      <img src="https://api.qrserver.com/v1/create-qr-code/?data=https://www.google.com/search?q=${item.nom}&size=150x150" alt="QR Google">
+
+    </div>
+    <div class="label-boxr_item_qr">${item.nom} </div>
+  </div>`
+
 
   })
 }
@@ -132,6 +127,23 @@ function createqrCode(){
       <style>
         body { margin: 0; padding: 20px; font-family: sans-serif; background: white; }
         #qrcode > * { page-break-inside: avoid; break-inside: avoid; margin: 10px 0; }
+        .container_item_qr { display: flex; width: 200px; height: 200px; }
+
+        .main-boxr_item_qr {
+          flex: 1;
+          margin:auto; }
+
+        .label-boxr_item_qr {
+          width: 40px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          writing-mode: vertical-rl;
+          transform: rotate(180deg); /* texte lisible de bas en haut */
+          color: #000; /* bleu */
+          font-family: sans-serif;
+          font-size: 24px;
+        }
       </style>
     </head>
     <body>

@@ -174,7 +174,7 @@ function createqrCode(){
   function ask_dld_img(index){
     ons.notification.confirm({ message: 'Télécharger ?', buttonLabels: ["Annuler", "OK"], title: 'Confirmez' })
       .then(function(input) {
-            if(input == 1){ function dld_imgQR_solo(index) }
+            if(input == 1){ dld_imgQR_solo(index) }
     });
     
   }

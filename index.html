@@ -124,29 +124,36 @@ function createqrCode(){
   var content = document.getElementById('alt_qrCode').outerHTML;
 
   var printWindow = window.open('', '', 'height=800,width=800');
+
   printWindow.document.write(`
-    <html>
-      <head>
-        <title>Impression QR Code</title>
-        <style>
-          body { margin: 0; padding: 20px; font-family: sans-serif; background: white; }
-          #qrcode > * { page-break-inside: avoid; break-inside: avoid; margin: 10px 0; }
-        </style>
-      </head>
-      <body>
-        Mes tables
-        ${content}
-        <script>
-          window.onload = function() {
-            window.focus();
-            window.print();
-            window.close();
-          }
-        </script>
-      </body>
-    </html>
-  `);
+  <html>
+    <head>
+      <title>Print</title>
+      <style>
+        body { margin: 0; padding: 20px; font-family: sans-serif; background: white; }
+        #qrcode > * { page-break-inside: avoid; break-inside: avoid; margin: 10px 0; }
+      </style>
+    </head>
+    <body>
+      <h1>Mes tables</h1>
+      ${content}
+
+      <script>
+        window.onload = function() {
+          window.focus();
+          window.print();
+          window.close();
+        }
+      <\/script> <!-- 👈 Échapper ici -->
+    </body>
+  </html>
+`);
+
+
   printWindow.document.close();
+
+
+
 }
   
  

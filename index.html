@@ -10,6 +10,45 @@
       <link rel="stylesheet" href="https://unpkg.com/onsenui/css/onsen-css-components.min.css">
       <script src="https://unpkg.com/onsenui/js/onsenui.min.js"></script>
       <script src="https://code.jquery.com/jquery-3.6.3.js"></script>
+
+
+    <style>
+      .bgCanvas {
+    background: linear-gradient(to left, turquoise, greenyellow);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 180px;
+    width: 90%;
+    margin: auto;
+    border-radius: 30px;
+    margin-bottom: 20px;
+      }
+
+      
+.qrCanvas {
+    width: 84%;
+    padding: 5px 5px 10px 5px;
+    background-color: white;
+    height: 155px;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 30px;
+    text-align: center;
+  }
+
+
+
+@media print {
+ 
+  #qrcode{
+    grid-template-columns: repeat(3, 1fr)!important;
+    row-gap: 50px;
+  }
+}
+
+      
+    </style>
     
   </head>
 
@@ -49,7 +88,26 @@
 
 
 <script>
-table = [{"timestamps":1710000013,"nb":"tab1","nomUser":"Thomas Leroy"},{"timestamps":1710000014,"nb":"tab2","nomUser":"Paul Morel"},{"timestamps":1710000015,"nb":"tab3","nomUser":"Léa Fontaine"},{"timestamps":1710000016,"nb":"tab4","nomUser":"Sophie Martin"},{"timestamps":1710000017,"nb":"tab5","nomUser":"Emma Lefevre"},{"timestamps":1710000013,"nb":"tab1","nomUser":"Thomas Leroy"},{"timestamps":1710000014,"nb":"tab2","nomUser":"Paul Morel"},{"timestamps":1710000015,"nb":"tab3","nomUser":"Léa Fontaine"},{"timestamps":1710000016,"nb":"tab4","nomUser":"Sophie Martin"},{"timestamps":1710000017,"nb":"tab5","nomUser":"Emma Lefevre"}, {"timestamps":1710000013,"nb":"tab1","nomUser":"Thomas Leroy"},{"timestamps":1710000014,"nb":"tab2","nomUser":"Paul Morel"},{"timestamps":1710000015,"nb":"tab3","nomUser":"Léa Fontaine"},{"timestamps":1710000016,"nb":"tab4","nomUser":"Sophie Martin"},{"timestamps":1710000017,"nb":"tab5","nomUser":"Emma Lefevre"},{"timestamps":1710000013,"nb":"tab1","nomUser":"Thomas Leroy"},{"timestamps":1710000014,"nb":"tab2","nomUser":"Paul Morel"},{"timestamps":1710000015,"nb":"tab3","nomUser":"Léa Fontaine"},{"timestamps":1710000016,"nb":"tab4","nomUser":"Sophie Martin"},{"timestamps":1710000017,"nb":"tab5","nomUser":"Emma Lefevre"}]
+table = [{"timestamps":1710000013,"nom":"tab1","nomUser":"Thomas Leroy"},
+         {"timestamps":1710000014,"nom":"tab2","nomUser":"Paul Morel"},
+         {"timestamps":1710000015,"nom":"tab3","nomUser":"Léa Fontaine"},
+         {"timestamps":1710000016,"nom":"tab4","nomUser":"Sophie Martin"},
+         {"timestamps":1710000017,"nom":"tab5","nomUser":"Emma Lefevre"},
+         {"timestamps":1710000013,"nom":"tab6","nomUser":"Thomas Leroy"},
+         {"timestamps":1710000014,"nom":"tab7","nomUser":"Paul Morel"},
+         {"timestamps":1710000015,"nom":"tab8","nomUser":"Léa Fontaine"},
+         {"timestamps":1710000016,"nom":"tab9","nomUser":"Sophie Martin"},
+         {"timestamps":1710000017,"nom":"tab10","nomUser":"Emma Lefevre"},
+         {"timestamps":1710000013,"nom":"tab11","nomUser":"Thomas Leroy"},
+         {"timestamps":1710000014,"nom":"tab12","nomUser":"Paul Morel"},
+         {"timestamps":1710000015,"nom":"tab13","nomUser":"Léa Fontaine"},
+         {"timestamps":1710000016,"nom":"tab14","nomUser":"Sophie Martin"},
+         {"timestamps":1710000017,"nom":"tab15","nomUser":"Emma Lefevre"},
+         {"timestamps":1710000013,"nom":"tab16","nomUser":"Thomas Leroy"},
+         {"timestamps":1710000014,"nom":"tab17","nomUser":"Paul Morel"},
+         {"timestamps":1710000015,"nom":"tab18","nomUser":"Léa Fontaine"},
+         {"timestamps":1710000016,"nom":"tab19","nomUser":"Sophie Martin"},
+         {"timestamps":1710000017,"nom":"tab20","nomUser":"Emma Lefevre"}]
 
 
 function generateQr(){
@@ -68,7 +126,7 @@ container.innerHTML = ""
             // Ajouter un titre
             let title = document.createElement("div");
             title.classList.add("title");
-            title.textContent = item.nb;
+            title.textContent = item.nom;
             title.id = `title_${index}`
             title.style.fontFamily = "Arial, sans-serif";
             title.style.fontSize = "18px"
@@ -92,7 +150,7 @@ container.innerHTML = ""
     options = {
     quietZone: 0,
     quietZoneColor: "rgba(0,0,0,0)",
-    text: `https://www.google.com/search?q=${item.nb}`,
+    text: `https://www.google.com/search?q=${item.nom}`,
     width: 100,
     height: 100,
     colorDark : "#000000",

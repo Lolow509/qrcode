@@ -102,7 +102,7 @@ function createqrCode(){
    
    document.querySelector('#alt_qrCode').innerHTML += ` <div class="container_item_qr">
     <div class="main-boxr_item_qr">
-      <img src="https://api.qrserver.com/v1/create-qr-code/?data=https://www.google.com/search?q=${item.nom}&size=150x150" alt="QR Google">
+      <img onclick="ask_dld_img(${index})" id="img_qr_${index}" src="https://api.qrserver.com/v1/create-qr-code/?data=https://www.google.com/search?q=${item.nom}&size=150x150" alt="${item.nom}">
 
     </div>
     <div class="label-boxr_item_qr">${item.nom} </div>
@@ -167,6 +167,42 @@ function createqrCode(){
 
 
 }
+
+
+
+
+  function ask_dld_img(index){
+    ons.notification.confirm({ message: 'Télécharger ?', buttonLabels: ["Annuler", "OK"], title: 'Confirmez' })
+      .then(function(input) {
+            if(input == 1){ function dld_imgQR_solo(index) }
+    });
+    
+  }
+
+
+
+
+  async function dld_imgQR_solo(index){
+//modal wait
+    img = document.querySelector(`#img_qr_${index}`)
+
+        try {
+          const response = await fetch(img.src, { mode: 'cors' });
+          const blob = await response.blob();
+          const url = URL.createObjectURL(blob);
+
+          const link = document.createElement('a');
+          link.href = url;
+          link.download = img.alt  + '.png';
+          document.body.appendChild(link);
+          link.click();
+          document.body.removeChild(link);
+          URL.revokeObjectURL(url);
+        } catch (err) {
+          ons.notification.alert("Erreur lors du téléchargement : " + err.message);
+        }
+
+  }
   
  
 </script>

@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Print Qr Code</title>
+  </head>
+
+<body>
+
+<ons-page>
+<div id="main_box" style="text-align: center; margin-top: 30px;">
+  
+  
+  <p class="colorPicker">
+    <label for="">Couleur 1</label>
+  <input id="colorPicker_1" type="color" onchange="updateColor(this.value)" value="#44E1CB" >
+  </p>
+  
+  <p class="colorPicker">
+    <label for="">Couleur 2</label>
+  <input id="colorPicker_2" type="color" onchange="updateColor(this.value)" value="#A8FE36" >
+  </p>
+  
+  <ons-button> <ons-icon icon="md-print"></ons-icon> Imprimer</ons-button>
+   
+  </div>
+
+
+
+<h1 onclick="window.print();">Générateur de Qr Code</h1>
+<div id="qrcode" style="text-align: center; display: grid; grid-template-columns: repeat(2, 1fr);"></div>
+  
+  
+  
+  
+  </ons-page>
+
+</body>
+
+
+
+
+<script>
+table = [{"timestamps":1710000013,"nb":"tab1","nomUser":"Thomas Leroy"},{"timestamps":1710000014,"nb":"tab2","nomUser":"Paul Morel"},{"timestamps":1710000015,"nb":"tab3","nomUser":"Léa Fontaine"},{"timestamps":1710000016,"nb":"tab4","nomUser":"Sophie Martin"},{"timestamps":1710000017,"nb":"tab5","nomUser":"Emma Lefevre"},{"timestamps":1710000013,"nb":"tab1","nomUser":"Thomas Leroy"},{"timestamps":1710000014,"nb":"tab2","nomUser":"Paul Morel"},{"timestamps":1710000015,"nb":"tab3","nomUser":"Léa Fontaine"},{"timestamps":1710000016,"nb":"tab4","nomUser":"Sophie Martin"},{"timestamps":1710000017,"nb":"tab5","nomUser":"Emma Lefevre"}, {"timestamps":1710000013,"nb":"tab1","nomUser":"Thomas Leroy"},{"timestamps":1710000014,"nb":"tab2","nomUser":"Paul Morel"},{"timestamps":1710000015,"nb":"tab3","nomUser":"Léa Fontaine"},{"timestamps":1710000016,"nb":"tab4","nomUser":"Sophie Martin"},{"timestamps":1710000017,"nb":"tab5","nomUser":"Emma Lefevre"},{"timestamps":1710000013,"nb":"tab1","nomUser":"Thomas Leroy"},{"timestamps":1710000014,"nb":"tab2","nomUser":"Paul Morel"},{"timestamps":1710000015,"nb":"tab3","nomUser":"Léa Fontaine"},{"timestamps":1710000016,"nb":"tab4","nomUser":"Sophie Martin"},{"timestamps":1710000017,"nb":"tab5","nomUser":"Emma Lefevre"}]
+
+
+function generateQr(){
+  let container = document.getElementById("qrcode");
+container.innerHTML = ""
+ 
+  table.forEach((item, index) => {
+
+ let qrDiv = document.createElement("div");
+  let bgDiv = document.createElement("div");
+  bgDiv.id = `bgCanvas${index}`;
+  bgDiv.classList.add("bgCanvas");
+            qrDiv.classList.add("qrCanvas");
+             qrDiv.id = `qrCanvas${index}`;
+
+            // Ajouter un titre
+            let title = document.createElement("div");
+            title.classList.add("title");
+            title.textContent = item.nb;
+            title.id = `title_${index}`
+            title.style.fontFamily = "Arial, sans-serif";
+            title.style.fontSize = "18px"
+            title.style.color = "#004284";
+            title.style.fontWeight = "bold"
+            title.style.margin = "10px"
+            title.style.backgroundColor = "white"
+            qrDiv.appendChild(title);
+
+            // Ajouter l'élément QR code
+            let qrCodeDiv = document.createElement("div");
+            qrCodeDiv.classList.add("qrBox");
+    qrDiv.appendChild(qrCodeDiv);
+
+
+            bgDiv.append(qrDiv)
+            // Ajouter dans le conteneur
+            container.appendChild(bgDiv);
+
+    // Options
+    options = {
+    quietZone: 0,
+    quietZoneColor: "rgba(0,0,0,0)",
+    text: `https://www.google.com/search?q=${item.nb}`,
+    width: 100,
+    height: 100,
+    colorDark : "#000000",
+    colorLight : "#ffffff",
+    logo: "https://cdn-icons-png.flaticon.com/512/16635/16635282.png",
+    logoWidth: 30, // fixed logo width. default is `width/3.5`
+    logoHeight: 30, // fixed logo height. default is `heigth/3.5`
+    crossOrigin: "anonymous",
+    correctLevel : QRCode.CorrectLevel.H, // L, M, Q, H
+
+    };
+
+  // Create QRCode Object
+    new QRCode(qrCodeDiv, options);
+
+
+})
+}
+
+
+
+ function updateColor() {
+   let color1 = document.getElementById("colorPicker_1").value
+   let color2 = document.getElementById("colorPicker_2").value
+   
+    const elements = document.querySelectorAll('.bgCanvas');
+      elements.forEach(el => {
+        el.style.background = `linear-gradient(to left, ${color2}, ${color1})`;
+      });
+ }
+</script>
+
+</html>
